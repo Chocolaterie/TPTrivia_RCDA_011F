@@ -1,0 +1,7 @@
+{
+  "name": "TPTrivia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
