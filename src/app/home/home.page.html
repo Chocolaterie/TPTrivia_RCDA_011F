@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,63 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Open Trivia</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+    <div [ngSwitch]="currentState">
+
+      <div *ngSwitchCase="State.WAIT">
+
+        <ion-list>
+          <!-- Pseudo -->
+          <ion-item>
+            <ion-input [(ngModel)]="pseudo" label="Votre pseudo" placeholder="Enter un pseudo"></ion-input>
+          </ion-item>
+          <!-- Select  -->
+          <ion-item>
+            <ion-select label="Difficulté" label-placement="fixed" placeholder="Difficulté">
+              <ion-select-option *ngFor="let item of difficulties" value="apple">{{item }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Mémoriser -->
+          <ion-item>
+            <ion-checkbox labelPlacement="end">Mémoriser mes informations</ion-checkbox>
+          </ion-item>
+
+          <!-- Erreur -->
+          <ion-text color="danger">{{ errorText }}</ion-text>
+
+          <!-- Button -->
+          <ion-button (click)="onSubmit()" expand="full">Full</ion-button>
+
+        </ion-list>
+      </div>
+      <!-- Si joué -->
+      <div *ngSwitchCase="State.PLAY">
+        <h4>Bienvenue {{ pseudo }}</h4>
+
+        <!-- La question -->
+        <h3>De quelle couleur est le cheval blanc d'Henri IV ?</h3>
+
+        <!-- Les choix  -->
+        <ion-grid>
+          <ion-row>
+            <ion-col> <ion-button expand="full">Blanc</ion-button></ion-col>
+            <ion-col> <ion-button expand="full">Noir</ion-button></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col> <ion-button expand="full">Marron</ion-button></ion-col>
+            <ion-col> <ion-button expand="full">Je ne sais pas</ion-button></ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- Si repondu  -->
+        <ion-button expand="full">Je ne sais pas</ion-button>
+      </div>
+
+    </div>
   </div>
 </ion-content>
