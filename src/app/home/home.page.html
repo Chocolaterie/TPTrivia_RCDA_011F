@@ -14,11 +14,9 @@
   </ion-header>
 
   <div id="container">
-
     <div [ngSwitch]="currentState">
-
+      <!-- Wait State  -->
       <div *ngSwitchCase="State.WAIT">
-
         <ion-list>
           <!-- Pseudo -->
           <ion-item>
@@ -35,18 +33,14 @@
           <ion-item>
             <ion-checkbox labelPlacement="end">Mémoriser mes informations</ion-checkbox>
           </ion-item>
-
-          <!-- Erreur -->
-          <ion-text color="danger">{{ errorText }}</ion-text>
-
           <!-- Button -->
-          <ion-button (click)="onSubmit()" expand="full">Full</ion-button>
+          <ion-button (click)="onSubmit()" expand="full">Commencer</ion-button>
 
         </ion-list>
       </div>
       <!-- Si joué -->
       <div *ngSwitchCase="State.PLAY">
-        <h4>Bienvenue {{ pseudo }}</h4>
+        <h4 class="welcome-text">Bienvenue {{ pseudo }}</h4>
 
         <!-- La question -->
         <h3>De quelle couleur est le cheval blanc d'Henri IV ?</h3>
@@ -54,16 +48,21 @@
         <!-- Les choix  -->
         <ion-grid>
           <ion-row>
-            <ion-col> <ion-button expand="full">Blanc</ion-button></ion-col>
-            <ion-col> <ion-button expand="full">Noir</ion-button></ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col> <ion-button expand="full">Marron</ion-button></ion-col>
-            <ion-col> <ion-button expand="full">Je ne sais pas</ion-button></ion-col>
+            <ion-col *ngFor="let reply of game.replies">
+              <ion-button (click)="onClickReply(reply)" [color]="getBtnColorResult(reply)" expand="full">{{
+                reply.replyMessage }}</ion-button></ion-col>
           </ion-row>
         </ion-grid>
         <!-- Si repondu  -->
-        <ion-button expand="full">Je ne sais pas</ion-button>
+        <div [ngSwitch]="game.currentState">
+          <div *ngSwitchCase="game.State.QUESTION_RESULT">
+            <ion-button expand="full">Question Suivante</ion-button>
+          </div>
+          <div *ngSwitchCase="game.State.END">
+            <ion-button expand="full">Rejouer</ion-button>
+          </div>
+ 
+        </div>
       </div>
 
     </div>

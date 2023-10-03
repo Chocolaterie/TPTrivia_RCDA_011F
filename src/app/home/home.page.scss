@@ -10,9 +10,7 @@
 #container p {
   font-size: 16px;
   line-height: 22px;
-
   color: #8c8c8c;
-
   margin: 0;
 }
 
@@ -23,4 +21,8 @@
 .error-message{
   text-align: left;
   padding: 10rem;
+}
+
+.welcome-text {
+  color : rgb(0, 145, 255);
 }

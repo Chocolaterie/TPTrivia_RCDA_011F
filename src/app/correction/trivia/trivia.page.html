@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Trivia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Trivia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenu de la page -->
+  <div>
+    <!-- Input Pseudo -->
+    <ion-item>
+      <ion-input [(ngModel)]="pseudo" label="Pseudo" placeholder="Saisir votre pseudo"></ion-input>
+    </ion-item>
+
+    <!-- Dropdown de la difficulté -->
+    <ion-item>
+      <ion-select label="Difficulté" placeholder="Veuillez selectionner une difficulté">
+        <ion-select-option value="easy">Easy</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="hard">Hard</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Checkbox : Remember me -->
+    <ion-item>
+      <ion-checkbox labelPlacement="end">Mémoriser mes informations</ion-checkbox>
+    </ion-item>
+
+    <!-- Message d'erreur -->
+    <div class="error-message-div">
+      <ion-text color="danger">{{ errorMessage }}</ion-text>
+    </div>
+    <!-- Button : Commencer -->
+    <ion-button expand="full" (click)="onSubmit()">Commencer</ion-button>
+
+  </div>
+</ion-content>
