@@ -34,10 +34,6 @@
         <ion-checkbox labelPlacement="end">Mémoriser mes informations</ion-checkbox>
       </ion-item>
 
-      <!-- Message d'erreur -->
-      <div class="error-message-div">
-        <ion-text color="danger">{{ errorMessage }}</ion-text>
-      </div>
       <!-- Button : Commencer -->
       <ion-button expand="full" (click)="onSubmit()">Commencer</ion-button>
     </div>
@@ -47,10 +43,19 @@
       <p>Bienvenue {{ pseudo }}</p>
       <p>Quelle le meilleur Beurre de France</p>
 
-      <ion-button expand="full">Crevete Nutella</ion-button>
-      <ion-button expand="full">Pinte au chocolat blanc</ion-button>
-      <ion-button expand="full">Beurre Salé Doux</ion-button>
-      <ion-button expand="full">Kotlin (On aime ca)</ion-button>
+      <ion-button expand="full" (click)="onReplyClick()">Crevete Nutella</ion-button>
+      <ion-button expand="full" (click)="onReplyClick()">Pinte au chocolat blanc</ion-button>
+      <ion-button expand="full" (click)="onReplyClick()">Beurre Salé Doux</ion-button>
+      <ion-button expand="full" (click)="onReplyClick()">Kotlin (On aime ca)</ion-button>
     </div>
   </div>
+
+  <!-- Alert caché par défaut -->
+  <ion-alert [isOpen]="isAlertOpen" header="Information(s) Manquante(s)" [message]="errorMessage"
+    (didDismiss)="setOpen(false)"></ion-alert>
+
+  <!-- Toast caché par défaut -->
+  <ion-toast [isOpen]="isToastOpen" message="Votre réponse : A" duration="1000"
+    (didDismiss)="setToastOpen(false)"></ion-toast>
+
 </ion-content>

@@ -30,22 +30,33 @@ export class TriviaPage implements OnInit {
   /**
    * Le pseudo
    */
-  pseudo : String = ""
+  pseudo: String = ""
 
   /**
    * Message d'erreur
    */
-  errorMessage : String = ""
+  errorMessage: String = ""
 
   /**
    * Etat actuel de la préparation du Trivia sur la page
    */
-  currentTriviaState : TriviaState = TriviaState.SAISIE
+  currentTriviaState: TriviaState = TriviaState.SAISIE
 
   /**
    * Wtf ? Donner possibilité à la page de voir le Typage de l'enum
    */
   TriviaState = TriviaState;
+
+  /**
+   * Savoir si oui ou non on affiche l'alert
+   */
+  isAlertOpen: boolean = false;
+
+
+  /**
+   * Savoir si oui ou non on affiche toast
+   */
+  isToastOpen: boolean = false;
 
   constructor() { }
 
@@ -53,18 +64,42 @@ export class TriviaPage implements OnInit {
   }
 
   /**
+   * Pour mettre a jour l'alert quand elle se ferme
+   * @param isOpen 
+   */
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
+
+  /**
+  * Pour mettre a jour toast quand elle se ferme
+  * @param isOpen 
+  */
+  setToastOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
+
+  /**
    * Event clique pour verifier la saisie
    */
   onSubmit() {
     // Si pseudo est trop petit
-    if (this.pseudo.length < 4){
+    if (this.pseudo.length < 4) {
       // Erreur
       this.errorMessage = "Veuillez entrer un pseudo d'au moins 3 caractères"
+      // Ouvrir l'alert
+      this.isAlertOpen = true;
+      // c'est pareil avec => setOpen(true);
     }
     else {
       // C'est OK
       this.currentTriviaState = TriviaState.PLAY
     }
+  }
+
+  onReplyClick() {
+    this.isToastOpen = true;
+    // c'est pareil avec => setToastOpen(true);
   }
 
 }
