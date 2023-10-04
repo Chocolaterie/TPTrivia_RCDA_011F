@@ -1,7 +1,22 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+
+/**
+ * Etat du Trivia (avant le jeu, à la préparation)
+ */
+enum TriviaState {
+  SAISIE,
+  PLAY
+}
+
+enum GameState {
+  SHOW_QUESTION,
+  REPLY_RESULT,
+  END_GAME
+}
+
 
 @Component({
   selector: 'app-trivia',
@@ -22,6 +37,16 @@ export class TriviaPage implements OnInit {
    */
   errorMessage : String = ""
 
+  /**
+   * Etat actuel de la préparation du Trivia sur la page
+   */
+  currentTriviaState : TriviaState = TriviaState.SAISIE
+
+  /**
+   * Wtf ? Donner possibilité à la page de voir le Typage de l'enum
+   */
+  TriviaState = TriviaState;
+
   constructor() { }
 
   ngOnInit() {
@@ -37,7 +62,8 @@ export class TriviaPage implements OnInit {
       this.errorMessage = "Veuillez entrer un pseudo d'au moins 3 caractères"
     }
     else {
-      // Succès
+      // C'est OK
+      this.currentTriviaState = TriviaState.PLAY
     }
   }
 
